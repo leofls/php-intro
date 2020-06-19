@@ -1,5 +1,5 @@
-<?php 
-    session_start();
+<?php     
+    include "servicos/servicosMensagemSessao.php"
 ?>
 
 <!DOCTYPE html>
@@ -15,11 +15,13 @@
     <p>Formulario para Inscrição</p>
     <form action="script.php" method="post">
         <?php
-            $menssagemDeSucesso = isset($_SESSION['mensagem-de-sucesso']) ? $_SESSION['mensagem-de-erro'] : '';
-
-            $menssagemDeErro = isset($_SESSION['mensagem-de-erro']) ? $_SESSION['mensagem-de-erro'] : '';
+            $menssagemDeSucesso = obterMensagemSucesso();
+            if(!empty($menssagemDeSucesso)){
+                echo $menssagemDeSucesso;
+            }
+            $menssagemDeErro = obterMensagemErro();
             if(!empty($menssagemDeErro)){
-                echo $menssagemDeErro;
+                echo "<p style='color: red'>".$menssagemDeErro. " </p> ";
             }
         ?>
         <p>Nome: <input type="text" name="nome"> </p>
